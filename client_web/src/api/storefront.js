@@ -15,6 +15,11 @@ export const updateMe = (data, token) => Patch("public/auth/me/", data, token);
 
 export const getOrganizations = () => Get("public/organizations/");
 
+// Определяет организацию по домену/поддомену браузера (ali.maximumcomfort.pro
+// -> организация со slug="ali") — см. PublicOrganizationResolveView на бэкенде.
+export const resolveOrganizationByHost = (host) =>
+  Get(`public/organizations/resolve/${buildQuery({ host })}`);
+
 export const getOrganization = (orgId) => Get(`public/organizations/${orgId}/`);
 
 export const getCategories = (orgId) =>

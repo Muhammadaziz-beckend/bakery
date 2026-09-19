@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrganizations } from "../api/storefront";
+import { getOrganizations, resolveOrganizationByHost } from "../api/storefront";
 import { errorMessage, isApiError } from "../utils/apiHelpers";
 import { useCart } from "../context/CartContext.jsx";
 
@@ -19,10 +19,23 @@ export function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Если сайт открыт по поддомену/своему домену конкретной пекарни
+  // (например, ali.maximumcomfort.pro), сразу переходим в её витрину —
+  // общий список пекарен в этом случае не нужен. Список на / показываем,
+  // только если текущий хост ни к какой организации не привязан (общий
+  // домен STOREFRONT_BASE_DOMAIN, localhost при разработке и т.п.).
   useEffect(() => {
     let cancelled = false;
     (async () => {
       setLoading(true);
+
+      const resolved = await resolveOrganizationByHost(window.location.hostname);
+      if (cancelled) return;
+      if (!isApiError(resolved) && resolved.data?.id) {
+        navigate(`/store/${resolved.data.id}`, { replace: true });
+        return;
+      }
+
       const res = await getOrganizations();
       if (cancelled) return;
       if (isApiError(res)) {
@@ -36,7 +49,7 @@ export function Home() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="page-wrap">
