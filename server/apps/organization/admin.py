@@ -34,4 +34,6 @@ class OrganizationAdmin(admin.ModelAdmin):
     
     
     def logo_image(self, obj):
+        if not obj.logo:
+            return "—"
         return format_html(f'<img src="{obj.logo.url}" style="max-width:100px; max-height:100px; border-radius:100px;"/>')
