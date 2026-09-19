@@ -5,7 +5,11 @@ import { useCart } from "../context/CartContext.jsx";
 export function Header() {
   const navigate = useNavigate();
   const { token, customer, logout } = Config();
-  const { orgId, org, count } = useCart();
+  const { orgId, org, count, homeOrgId } = useCart();
+  // На выделенном поддомене организации (ali.maximumcomfort.pro) "/" ведёт
+  // обратно в эту же витрину — идти там больше некуда, список пекарен с
+  // этого домена недоступен, поэтому стрелку назад не показываем.
+  const isDedicatedOrgHost = Boolean(homeOrgId);
 
   const handleLogout = () => {
     logout();
@@ -17,9 +21,11 @@ export function Header() {
       <div className="shop-header__inner">
         {orgId && org ? (
           <div className="shop-header__brand-group">
-            <Link to="/" className="shop-header__back" aria-label="К списку пекарен" title="К списку пекарен">
-              ←
-            </Link>
+            {!isDedicatedOrgHost && (
+              <Link to="/" className="shop-header__back" aria-label="К списку пекарен" title="К списку пекарен">
+                ←
+              </Link>
+            )}
             <Link to={`/store/${orgId}`} className="shop-header__brand shop-header__brand--org">
               <span className="shop-header__logo">
                 {org.logo ? <img src={org.logo} alt={org.name} /> : <span>🥐</span>}

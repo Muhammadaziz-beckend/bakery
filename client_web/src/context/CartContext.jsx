@@ -1,5 +1,13 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
-import { getOrganization } from "../api/storefront";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { getOrganization, resolveOrganizationByHost } from "../api/storefront";
 import { isApiError } from "../utils/apiHelpers";
 
 const CartContext = createContext(null);
@@ -43,6 +51,30 @@ export function CartProvider({ children }) {
   const [org, setOrg] = useState(null);
   const [items, setItems] = useState([]);
   const requestedIdRef = useRef(null);
+
+  // Если сайт открыт по выделенному поддомену/домену организации
+  // (ali.maximumcomfort.pro), с этого хоста нет пути "назад к списку
+  // пекарен" — такого списка тут просто нет, домен целиком принадлежит
+  // одной организации. Резолвим это один раз при старте приложения, чтобы
+  // и Home (редирект на /store/:id), и Header (скрыть "← к списку пекарен")
+  // могли на это опереться.
+  const [homeOrgId, setHomeOrgId] = useState(null);
+  const [homeResolved, setHomeResolved] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const res = await resolveOrganizationByHost(window.location.hostname);
+      if (cancelled) return;
+      if (!isApiError(res) && res.data?.id) {
+        setHomeOrgId(res.data.id);
+      }
+      setHomeResolved(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Логотип, название и адрес пекарни нужны в хедере (Header.jsx) сразу
   // после выбора организации на / — тянем их сюда же, чтобы не заводить
@@ -138,8 +170,24 @@ export function CartProvider({ children }) {
       clear,
       count,
       total,
+      homeOrgId,
+      homeResolved,
     }),
-    [orgId, org, items, openOrg, closeOrg, addItem, updateQty, removeItem, clear, count, total]
+    [
+      orgId,
+      org,
+      items,
+      openOrg,
+      closeOrg,
+      addItem,
+      updateQty,
+      removeItem,
+      clear,
+      count,
+      total,
+      homeOrgId,
+      homeResolved,
+    ]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

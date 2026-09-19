@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrganizations, resolveOrganizationByHost } from "../api/storefront";
+import { getOrganizations } from "../api/storefront";
 import { errorMessage, isApiError } from "../utils/apiHelpers";
 import { useCart } from "../context/CartContext.jsx";
 
 export function Home() {
   const navigate = useNavigate();
-  const { closeOrg } = useCart();
+  const { closeOrg, homeOrgId, homeResolved } = useCart();
   const [organizations, setOrganizations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -20,22 +20,22 @@ export function Home() {
   }, []);
 
   // Если сайт открыт по поддомену/своему домену конкретной пекарни
-  // (например, ali.maximumcomfort.pro), сразу переходим в её витрину —
-  // общий список пекарен в этом случае не нужен. Список на / показываем,
-  // только если текущий хост ни к какой организации не привязан (общий
-  // домен STOREFRONT_BASE_DOMAIN, localhost при разработке и т.п.).
+  // (например, ali.maximumcomfort.pro), CartProvider уже резолвнул её в
+  // homeOrgId — сразу переходим в витрину, общий список пекарен тут не
+  // нужен (и вести на него больше некуда, см. Header). Показываем список,
+  // только если хост ни к какой организации не привязан (общий домен
+  // STOREFRONT_BASE_DOMAIN, localhost при разработке и т.п.).
   useEffect(() => {
+    if (!homeResolved) return;
+
+    if (homeOrgId) {
+      navigate(`/store/${homeOrgId}`, { replace: true });
+      return;
+    }
+
     let cancelled = false;
     (async () => {
       setLoading(true);
-
-      const resolved = await resolveOrganizationByHost(window.location.hostname);
-      if (cancelled) return;
-      if (!isApiError(resolved) && resolved.data?.id) {
-        navigate(`/store/${resolved.data.id}`, { replace: true });
-        return;
-      }
-
       const res = await getOrganizations();
       if (cancelled) return;
       if (isApiError(res)) {
@@ -49,7 +49,7 @@ export function Home() {
     return () => {
       cancelled = true;
     };
-  }, [navigate]);
+  }, [homeResolved, homeOrgId, navigate]);
 
   return (
     <div className="page-wrap">
