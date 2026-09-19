@@ -17,9 +17,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     # front
     "http://72.56.16.210",
-    "maximumcomfort.pro",
-    "*.maximumcomfort.pro",
-    # 
+    "https://maximumcomfort.pro",
+    # поддомены организаций (*.maximumcomfort.pro) разрешены через
+    # CORS_ALLOWED_ORIGIN_REGEXES ниже — corsheaders не поддерживает
+    # wildcard-домены в CORS_ALLOWED_ORIGINS.
+    #
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
