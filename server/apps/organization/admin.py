@@ -1,3 +1,5 @@
+import concurrent.futures
+
 from django.contrib import admin
 from django.utils.html import format_html
 
@@ -43,6 +45,18 @@ class OrganizationAdmin(admin.ModelAdmin):
         # QuerySet.delete(), который не вызывает переопределённый
         # Organization.delete() — а значит, не чистит DNS-запись в
         # Cloudflare и nginx-конфиг (см. Organization.delete). Поэтому
-        # удаляем объекты по одному.
-        for obj in queryset:
-            obj.delete()
+        # чистим DNS/nginx отдельно: удаляем объекты из БД одним bulk-
+        # запросом (быстро, без частично удалённой пачки), а сами вызовы
+        # к Cloudflare/nginx для больших выборок гоняем параллельно —
+        # иначе N объектов дают N последовательных внешних запросов внутри
+        # одного admin-request и упираются в таймаут сервера/прокси.
+        slugs = [slug for slug in queryset.values_list("slug", flat=True) if slug]
+        queryset.delete()
+
+        if not slugs:
+            return
+
+        from .provisioning import deprovision_subdomain
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(len(slugs), 8)) as executor:
+            list(executor.map(deprovision_subdomain, slugs))

@@ -5,6 +5,7 @@ const { url } = Config();
 
 const api = axios.create({
   baseURL: `${url}`,
+  timeout: 15000,
 });
 
 // Добавляем перехватчик ответа

@@ -5,11 +5,13 @@ import { useCart } from "../context/CartContext.jsx";
 export function Header() {
   const navigate = useNavigate();
   const { token, customer, logout } = Config();
-  const { orgId, org, count, homeOrgId } = useCart();
+  const { orgId, org, count, homeOrgId, homeResolved } = useCart();
   // На выделенном поддомене организации (ali.maximumcomfort.pro) "/" ведёт
   // обратно в эту же витрину — идти там больше некуда, список пекарен с
-  // этого домена недоступен, поэтому стрелку назад не показываем.
-  const isDedicatedOrgHost = Boolean(homeOrgId);
+  // этого домена недоступен, поэтому стрелку назад не показываем. Пока
+  // резолв хоста ещё не завершился, считаем хост выделенным (прячем
+  // стрелку), чтобы не мигать битой ссылкой на org-поддомене.
+  const isDedicatedOrgHost = !homeResolved || Boolean(homeOrgId);
 
   const handleLogout = () => {
     logout();
