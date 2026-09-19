@@ -1,0 +1,333 @@
+/* .header_warehouse — сознательно не переиспользует .header_with_action:
+   у той вёрстки 3-колоночный grid под заголовок + пагинация + кнопка,
+   здесь же справа просто текстовая сводка стоимости склада. Общий класс
+   заставил бы оба варианта делить один и тот же CSS-блок между страницами. */
+.main .header.warehouse_header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .warehouse_summary {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+
+        .warehouse_summary_label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .warehouse_summary_value {
+            /* font-family: Georgia, "Times New Roman", serif; */
+            font-size: 24px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+    }
+}
+
+.form_error_banner {
+    background-color: #fbe0dc;
+    color: #b3261e;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.production_journal_loading {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.ingredient_add_card {
+    background-color: #fbf8f3;
+    border-radius: 18px;
+    padding: 20px 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    h3 {
+        /* font-family: Georgia, "Times New Roman", serif; */
+        font-size: 18px;
+        font-weight: 700;
+        color: #1c1c1c;
+    }
+
+    .ingredient_add_card_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+
+        .unit_manage_link {
+            flex-shrink: 0;
+            border: none;
+            background: none;
+            padding: 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #b5651d;
+            cursor: pointer;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+
+    .ingredient_add_row {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 2;
+        min-width: 160px;
+
+        &.field_unit {
+            flex: 0 0 90px;
+            min-width: 90px;
+        }
+
+        &.field_narrow {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .field_label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 15px;
+        color: #1c1c1c;
+        background-color: #f3ede2;
+    }
+
+    select:focus,
+    input:focus {
+        outline: 2px solid rgba(0, 0, 0, 0.15);
+    }
+
+    select:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    .select_wrapper {
+        position: relative;
+
+        select {
+            appearance: none;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        .select_arrow {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 15px;
+        }
+    }
+
+    .ingredient_add_btn {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        border: none;
+        border-radius: 12px;
+        padding: 12px 20px;
+        height: fit-content;
+
+        background-color: #1c1614;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        svg {
+            fill: white;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+    }
+
+    .form_error_banner {
+        margin-bottom: 0;
+    }
+}
+
+.ingredient_table {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 22px 26px;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    table {
+        width: 100%;
+        min-width: 560px;
+        border-collapse: collapse;
+
+        thead {
+            th {
+                text-align: left;
+                padding: 0 12px 10px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: .04em;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: #f8f4ee;
+
+                &:not(:last-child) {
+                    td {
+                        border-bottom: 8px solid #efe8de;
+                    }
+                }
+
+                td {
+                    padding: 16px 12px;
+                    font-size: 15px;
+                    color: #1c1c1c;
+
+                    &:first-child {
+                        border-top-left-radius: 12px;
+                        border-bottom-left-radius: 12px;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 12px;
+                        border-bottom-right-radius: 12px;
+                    }
+
+                    &.empty {
+                        text-align: center;
+                        color: rgba(0, 0, 0, 0.45);
+                    }
+                }
+            }
+        }
+
+        .ingredient_name {
+            font-weight: 600;
+        }
+
+        .ingredient_count {
+            font-weight: 700;
+
+            &.warning {
+                color: #b5651d;
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action_btn {
+            border: none;
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity .15s ease;
+
+            &:hover {
+                opacity: .8;
+            }
+
+            &.restock {
+                background-color: #e4f5ea;
+                color: #1f8a4c;
+            }
+
+            &.edit {
+                background-color: #e4dcce;
+                color: #1c1c1c;
+            }
+
+            &.delete {
+                width: 30px;
+                padding: 7px 0;
+                background-color: #f6d9d3;
+                color: #b3261e;
+                font-size: 16px;
+                line-height: 1;
+            }
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .main .header.warehouse_header {
+        justify-content: center;
+        text-align: center;
+
+        .warehouse_summary {
+            align-items: center;
+        }
+    }
+
+    .ingredient_add_card {
+        padding: 18px 16px;
+    }
+
+    .ingredient_table {
+        padding: 16px 14px;
+    }
+}

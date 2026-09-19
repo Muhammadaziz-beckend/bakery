@@ -1,0 +1,56 @@
+# Конфиг на каждую организацию генерируется автоматически (см.
+# utils/nginx.py, apps/organization/provisioning.py) при создании
+# организации или смене её slug — руками их создавать не нужно.
+#
+# На домене/поддомене организации раздаётся статика client_web (SPA), а
+# НЕ Django — фронтенд собран один раз с фиксированным VITE_API и сам
+# ходит в API по этому адресу с любого поддомена (см. core/cors.py —
+# там разрешён cross-origin с *.STOREFRONT_BASE_DOMAIN).
+#
+# Файлы кладутся в NGINX_SITES_DIR (.env) под именем org-<slug>.conf,
+# например org-vkusno.conf:
+#
+#   server {
+#       listen 80;
+#       server_name vkusno.bakery.uz;
+#
+#       root /var/www/client_web/dist;   # NGINX_FRONTEND_ROOT
+#       index index.html;
+#
+#       location / {
+#           try_files $uri $uri/ /index.html;
+#       }
+#   }
+#
+# SSL не настраивается на этом уровне — предполагается, что перед nginx
+# стоит Cloudflare с включённым проксированием (оранжевое облако),
+# который терминирует HTTPS для посетителей сам.
+#
+# Разовая настройка на сервере:
+#   1. Собрать фронтенд и положить его в NGINX_FRONTEND_ROOT:
+#        cd client_web && npm run build
+#        rsync -a dist/ /var/www/client_web/dist/
+#      (VITE_API в client_web/.env должен указывать на постоянный домен
+#      API — например https://api.bakery.uz/api/v1/ — общий для всех
+#      организаций; сам API этим механизмом никуда не разворачивается.)
+#   2. NGINX_SITES_DIR=/etc/nginx/sites-enabled в .env бэкенда (директория
+#      должна быть доступна на запись пользователю, от которого запущен
+#      Django).
+#   3. Убедиться, что /etc/nginx/nginx.conf подключает эту директорию:
+#        include /etc/nginx/sites-enabled/*.conf;
+#   4. Дать процессу Django право перезагружать nginx без пароля
+#      (NGINX_RELOAD_COMMAND в .env), например через sudoers:
+#        www-data ALL=(root) NOPASSWD: /usr/sbin/nginx -s reload
+#
+# Свой домен пекарни (custom_domain, например vkusno-bakery.uz) этим
+# механизмом не покрывается — его DNS не в вашем Cloudflare-зоне, поэтому
+# запись нужно добавлять вручную, когда организация об этом просит (тот
+# же шаблон — раздача статики, домен просто другой):
+#
+# server {
+#     listen 80;
+#     server_name vkusno-bakery.uz;
+#     root /var/www/client_web/dist;
+#     index index.html;
+#     location / { try_files $uri $uri/ /index.html; }
+# }

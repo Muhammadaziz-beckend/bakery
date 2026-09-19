@@ -1,0 +1,254 @@
+.limit_override_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 22, 20, 0.45);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.limit_override_modal {
+    width: 100%;
+    max-width: 640px;
+
+    background-color: #fbf8f3;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .limit_override_header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        .limit_override_subtitle {
+            margin: 4px 0 0;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.55);
+            max-width: 460px;
+        }
+
+        .limit_override_close {
+            flex-shrink: 0;
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.45);
+            cursor: pointer;
+            padding: 0;
+        }
+    }
+
+    .limit_override_form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+
+        .select_wrapper {
+            position: relative;
+            flex: 2;
+            min-width: 160px;
+
+            select {
+                appearance: none;
+                padding-right: 36px;
+                cursor: pointer;
+            }
+
+            .select_arrow {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: rgba(0, 0, 0, 0.4);
+                font-size: 16px;
+            }
+        }
+
+        select,
+        input[type="date"],
+        input[type="number"] {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1c1c1c;
+            background-color: #f3ede2;
+            color-scheme: light;
+        }
+
+        input[type="date"] {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        input[type="number"] {
+            flex: 1;
+            min-width: 90px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: 2px solid rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    .limit_override_add_btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: white;
+        background-color: #1c1614;
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+    }
+
+    .form_error_banner {
+        background-color: #fbe0dc;
+        color: #b3261e;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .limit_override_loading {
+        text-align: center;
+        padding: 24px 0;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 14px;
+    }
+
+    .limit_override_table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+
+        th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.45);
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            color: #1c1c1c;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    }
+
+    .limit_override_row_actions {
+        display: flex;
+        gap: 6px;
+    }
+
+    .limit_override_edit_btn,
+    .limit_override_delete_btn {
+        width: 26px;
+        height: 26px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .85;
+        }
+    }
+
+    .limit_override_edit_btn {
+        background-color: #ece3d4;
+        color: #1c1614;
+    }
+
+    .limit_override_delete_btn {
+        background-color: #f6d9d3;
+        color: #b3261e;
+        font-size: 16px;
+    }
+
+    .limit_override_cancel_btn {
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1c1614;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover:not(:disabled) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        &:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+    }
+
+    tr.editing td {
+        background-color: #faeee1;
+    }
+}
+
+@media (max-width: 560px) {
+    .limit_override_overlay {
+        padding: 20px 12px;
+    }
+
+    .limit_override_modal {
+        padding: 18px;
+
+        .limit_override_form {
+            flex-direction: column;
+
+            .select_wrapper,
+            input[type="date"],
+            input[type="number"],
+            .limit_override_add_btn {
+                width: 100%;
+            }
+        }
+    }
+}

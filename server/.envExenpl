@@ -1,0 +1,29 @@
+PORT_WEB=8000
+SECRET_KEY=bjf/sb-s=gbubguu448uuid4kngv05573
+
+# Database
+POSTGRES_DB=db
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=supper_password
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+# 
+ADMINER_PORT=8080
+
+AUTH_MODE=token # jwt
+
+# Витрина по поддоменам организаций, см. Organization.resolve_by_host
+STOREFRONT_BASE_DOMAIN=bakery.uz
+
+# Автосоздание поддомена организации в Cloudflare + nginx, см.
+# apps/organization/provisioning.py. Оставить пустыми, чтобы отключить.
+CLOUDFLARE_API_TOKEN=***
+CLOUDFLARE_ZONE_ID=***
+CLOUDFLARE_RECORD_TYPE=A
+CLOUDFLARE_PROXIED=true
+ORIGIN_HOST=1.2.3.4
+
+NGINX_SITES_DIR=
+NGINX_FRONTEND_ROOT=/var/www/client_web/dist
+NGINX_RELOAD_COMMAND=nginx -s reload

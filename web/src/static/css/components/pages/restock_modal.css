@@ -1,0 +1,202 @@
+.restock_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 22, 20, 0.45);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.restock_form {
+    width: 100%;
+    max-width: 420px;
+
+    background-color: #fbf8f3;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .restock_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        .restock_close {
+            flex-shrink: 0;
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.45);
+            cursor: pointer;
+            padding: 0;
+        }
+    }
+
+    .restock_current {
+        background-color: #f3ede2;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+
+        b {
+            color: #1c1c1c;
+        }
+    }
+
+    .field_row {
+        display: flex;
+        gap: 12px;
+
+        .field {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .field_label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    select,
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"] {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 15px;
+        color: #1c1c1c;
+        background-color: #f3ede2;
+    }
+
+    select:focus,
+    input:focus {
+        outline: 2px solid rgba(0, 0, 0, 0.15);
+    }
+
+    select:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    .select_wrapper {
+        position: relative;
+
+        select {
+            appearance: none;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        .select_arrow {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 16px;
+        }
+    }
+
+    .new_supplier_fields {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .supplier_toggle {
+        align-self: flex-start;
+        margin-top: 6px;
+
+        border: none;
+        background: none;
+        padding: 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #b5651d;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    .form_error_banner {
+        background-color: #fbe0dc;
+        color: #b3261e;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .submit_btn {
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        background-color: #1c1614;
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+    }
+}
+
+@media (max-width: 420px) {
+    .restock_overlay {
+        padding: 20px 12px;
+    }
+
+    .restock_form {
+        padding: 18px;
+
+        .field_row {
+            flex-wrap: wrap;
+
+            .field {
+                min-width: 140px;
+            }
+        }
+    }
+}

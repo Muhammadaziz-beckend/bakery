@@ -1,0 +1,210 @@
+.batch_form_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 22, 20, 0.45);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+
+    z-index: 100;
+}
+
+.batch_form {
+    width: 100%;
+    max-width: 420px;
+
+    background-color: #fbf8f3;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .batch_form_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        .batch_form_close {
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.45);
+            cursor: pointer;
+            padding: 0;
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .field_label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        select,
+        input {
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 15px;
+            color: #1c1c1c;
+            background-color: #f3ede2;
+        }
+
+        select:focus,
+        input:focus {
+            outline: 2px solid rgba(0, 0, 0, 0.15);
+        }
+
+        select:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .field_hint {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+
+            &.error {
+                color: #b3261e;
+            }
+        }
+
+        .select_wrapper {
+            position: relative;
+
+            select {
+                appearance: none;
+                padding-right: 36px;
+                cursor: pointer;
+            }
+
+            .select_arrow {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: rgba(0, 0, 0, 0.4);
+                font-size: 16px;
+            }
+        }
+    }
+
+    .ingredients_summary {
+        background-color: #f3ede2;
+        border-radius: 12px;
+        padding: 14px 16px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .ingredients_title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.45);
+            margin-bottom: 4px;
+        }
+
+        .ingredients_row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+
+            &.cost {
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                padding-top: 10px;
+                margin-top: 4px;
+                font-weight: 700;
+                color: #1c1c1c;
+
+                span:last-child {
+                    color: #b5651d;
+                }
+            }
+
+            &.shelf_life {
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.45);
+            }
+
+            &.insufficient {
+                color: #b3261e;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .ingredients_loading {
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .form_error_banner {
+        background-color: #fbe0dc;
+        color: #b3261e;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+
+        ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+        }
+    }
+
+    .submit_btn {
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        background-color: #1c1614;
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .batch_form_overlay {
+        padding: 20px 12px;
+    }
+
+    .batch_form {
+        padding: 18px;
+    }
+}

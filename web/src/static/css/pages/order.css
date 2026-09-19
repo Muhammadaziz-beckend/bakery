@@ -1,0 +1,328 @@
+.main .header.header_with_action {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+
+    h2 {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .header_pagination {
+        grid-column: 2;
+        justify-self: center;
+    }
+
+    .header_actions {
+        grid-column: 3;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn_create_batch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        border: none;
+        border-radius: 12px;
+        padding: 12px 20px;
+
+        background-color: #1c1614;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        svg {
+            fill: white;
+        }
+
+        &:hover {
+            opacity: .85;
+        }
+    }
+
+    .btn_secondary_action {
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 12px 18px;
+
+        background-color: transparent;
+        color: #1c1614;
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+        transition: opacity .15s ease, background-color .15s ease;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .main .header.header_with_action {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+
+        h2,
+        .header_pagination,
+        .header_actions {
+            grid-column: 1;
+            justify-self: center;
+        }
+    }
+}
+
+.form_error_banner {
+    background-color: #fbe0dc;
+    color: #b3261e;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+.production_journal_loading {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.order_status_summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    .order_status_card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+
+        border: 2px solid transparent;
+        border-radius: 16px;
+        padding: 16px 18px;
+        background-color: #f8f4ee;
+        cursor: pointer;
+        text-align: left;
+        transition: border-color .15s ease, opacity .15s ease;
+
+        &:hover {
+            opacity: .9;
+        }
+
+        &.active {
+            border-color: #1c1614;
+        }
+
+        .order_status_card_label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .order_status_card_value {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        &.status_pending .order_status_card_value {
+            color: #b5651d;
+        }
+
+        &.status_in_progress .order_status_card_value {
+            color: #2452b5;
+        }
+
+        &.status_done .order_status_card_value {
+            color: #1f8a4c;
+        }
+
+        &.status_returned .order_status_card_value {
+            color: #b3261e;
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .order_status_summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .order_status_summary {
+        gap: 10px;
+
+        .order_status_card {
+            padding: 12px 14px;
+        }
+    }
+
+    .order_card {
+        padding: 14px 16px;
+    }
+}
+
+.order_status_badge {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #e8e2d6;
+    color: #1c1c1c;
+    white-space: nowrap;
+
+    &.status_pending {
+        background-color: #f6e6d3;
+        color: #b5651d;
+    }
+
+    &.status_in_progress {
+        background-color: #dde6f6;
+        color: #2452b5;
+    }
+
+    &.status_done {
+        background-color: #e4f5ea;
+        color: #1f8a4c;
+    }
+
+    &.status_returned {
+        background-color: #f6d9d3;
+        color: #b3261e;
+    }
+}
+
+.order_list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.order_card {
+    background-color: #f8f4ee;
+    border-radius: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: opacity .15s ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &:hover {
+        opacity: .95;
+    }
+
+    .order_card_top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .order_card_client {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .order_card_name {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1c1c1c;
+    }
+
+    .order_card_meta {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+    }
+
+    .order_card_date {
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .order_card_total {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #1c1c1c;
+    }
+
+    .order_card_tel {
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+
+    .order_card_items {
+        font-size: 14px;
+        color: #1c1c1c;
+    }
+
+    .order_card_actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+    }
+
+    .action_btn {
+        border: none;
+        border-radius: 10px;
+        padding: 7px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: opacity .15s ease;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &.advance {
+            background-color: #1c1614;
+            color: white;
+        }
+
+        &.return {
+            background-color: #f6d9d3;
+            color: #b3261e;
+        }
+
+        &.edit {
+            background-color: #e8e2d6;
+            color: #1c1c1c;
+        }
+
+        &.delete {
+            width: 30px;
+            padding: 7px 0;
+            background-color: #f6d9d3;
+            color: #b3261e;
+            font-size: 16px;
+            line-height: 1;
+        }
+    }
+}

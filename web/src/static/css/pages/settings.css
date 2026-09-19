@@ -1,0 +1,208 @@
+.form_error_banner {
+    background-color: #fbe0dc;
+    color: #b3261e;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+.settings_grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.settings_card {
+    background-color: #fbf8f3;
+    border-radius: 18px;
+    padding: 24px 26px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    flex: 1 1 380px;
+    max-width: 480px;
+
+    h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 19px;
+        font-weight: 700;
+        color: #1c1c1c;
+    }
+
+    .settings_card_hint {
+        margin-top: -10px;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .field_row {
+        display: flex;
+        gap: 12px;
+
+        .field {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .field_label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="password"] {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 15px;
+        color: #1c1c1c;
+        background-color: #f3ede2;
+    }
+
+    input:focus {
+        outline: 2px solid rgba(0, 0, 0, 0.15);
+    }
+
+    input:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    .image_field {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        .image_preview {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+
+            border-radius: 12px;
+            background-color: #f3ede2;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .image_placeholder {
+                font-size: 11px;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .image_actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .image_upload_btn {
+            display: inline-block;
+            width: fit-content;
+
+            border: none;
+            border-radius: 10px;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: #e4dcce;
+            color: #1c1c1c;
+            cursor: pointer;
+            transition: opacity .15s ease;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+
+        .image_remove_btn {
+            width: fit-content;
+
+            border: none;
+            background: none;
+            padding: 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #b3261e;
+            cursor: pointer;
+            text-align: left;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+
+    .settings_card_footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 14px;
+
+        .settings_saved {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f8a4c;
+        }
+    }
+
+    .submit_btn {
+        align-self: flex-end;
+
+        border: none;
+        border-radius: 12px;
+        padding: 12px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        color: white;
+        background-color: #1c1614;
+        cursor: pointer;
+        transition: opacity .15s ease;
+        white-space: nowrap;
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .settings_card {
+        padding: 18px 16px;
+    }
+
+    .settings_card .field_row {
+        flex-wrap: wrap;
+    }
+}

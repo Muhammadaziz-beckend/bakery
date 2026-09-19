@@ -1,0 +1,235 @@
+.main .header.header_with_action {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+
+    h2 {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .header_pagination {
+        grid-column: 2;
+        justify-self: center;
+    }
+
+    .btn_create_batch {
+        grid-column: 3;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        border: none;
+        border-radius: 12px;
+        padding: 12px 20px;
+
+        background-color: #1c1614;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        svg {
+            fill: white;
+        }
+
+        &:hover {
+            opacity: .85;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .main .header.header_with_action {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+
+        h2,
+        .header_pagination,
+        .btn_create_batch {
+            grid-column: 1;
+            justify-self: center;
+        }
+    }
+
+    .debt_table {
+        padding: 16px 14px;
+    }
+}
+
+.form_error_banner {
+    background-color: #fbe0dc;
+    color: #b3261e;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+.production_journal_loading {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.debt_summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background-color: #faeee1;
+    border-radius: 14px;
+    padding: 14px 20px;
+
+    .debt_summary_label {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.55);
+    }
+
+    .debt_summary_value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #b5651d;
+    }
+}
+
+.debt_table {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 22px 26px;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    table {
+        width: 100%;
+        min-width: 560px;
+        border-collapse: collapse;
+
+        thead {
+            th {
+                text-align: left;
+                padding: 0 12px 10px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: .04em;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: #f8f4ee;
+
+                &:not(:last-child) {
+                    td {
+                        border-bottom: 8px solid #efe8de;
+                    }
+                }
+
+                td {
+                    padding: 16px 12px;
+                    font-size: 15px;
+                    color: #1c1c1c;
+
+                    &:first-child {
+                        border-top-left-radius: 12px;
+                        border-bottom-left-radius: 12px;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 12px;
+                        border-bottom-right-radius: 12px;
+                    }
+
+                    &.empty {
+                        text-align: center;
+                        color: rgba(0, 0, 0, 0.45);
+                    }
+                }
+            }
+        }
+
+        .debt_supplier_name {
+            display: block;
+            font-weight: 600;
+        }
+
+        .debt_supplier_tel {
+            display: block;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .debt_remaining {
+            font-weight: 700;
+
+            &.warning {
+                color: #b5651d;
+            }
+        }
+
+        .debt_status_badge {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+
+            &.paid {
+                background-color: #e4f5ea;
+                color: #1f8a4c;
+            }
+
+            &.unpaid {
+                background-color: #f6e6d3;
+                color: #b5651d;
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action_btn {
+            border: none;
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity .15s ease;
+
+            &:hover {
+                opacity: .8;
+            }
+
+            &.repay {
+                background-color: #e4f5ea;
+                color: #1f8a4c;
+            }
+
+            &.delete {
+                width: 30px;
+                padding: 7px 0;
+                background-color: #f6d9d3;
+                color: #b3261e;
+                font-size: 16px;
+                line-height: 1;
+            }
+        }
+    }
+}

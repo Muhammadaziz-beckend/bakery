@@ -1,0 +1,388 @@
+.product_form_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 22, 20, 0.45);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.product_form {
+    width: 100%;
+    max-width: 520px;
+
+    background-color: #fbf8f3;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    .product_form_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        .product_form_close {
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.45);
+            cursor: pointer;
+            padding: 0;
+        }
+    }
+
+    .field_row {
+        display: flex;
+        gap: 12px;
+
+        .field {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    .image_field {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        .image_preview {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+
+            border-radius: 12px;
+            background-color: #f3ede2;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .image_placeholder {
+                font-size: 11px;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .image_actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .image_upload_btn {
+            display: inline-block;
+            width: fit-content;
+
+            border: none;
+            border-radius: 10px;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: #e4dcce;
+            color: #1c1c1c;
+            cursor: pointer;
+            transition: opacity .15s ease;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+
+        .image_remove_btn {
+            width: fit-content;
+
+            border: none;
+            background: none;
+            padding: 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #b3261e;
+            cursor: pointer;
+            text-align: left;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .field_label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .field_hint {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 15px;
+        color: #1c1c1c;
+        background-color: #f3ede2;
+    }
+
+    select:focus,
+    input:focus {
+        outline: 2px solid rgba(0, 0, 0, 0.15);
+    }
+
+    select:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    .select_wrapper {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+
+        select {
+            appearance: none;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        .select_arrow {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 16px;
+        }
+    }
+
+    .field_checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #1c1c1c;
+        cursor: pointer;
+
+        input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+    }
+
+    .variants_hint {
+        background-color: #faeee1;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+        line-height: 1.4;
+        color: #7a4a1e;
+    }
+
+    .recipe_block {
+        background-color: #f3ede2;
+        border-radius: 12px;
+        padding: 14px 16px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .recipe_head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            .field_label {
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .04em;
+                color: rgba(0, 0, 0, 0.45);
+            }
+        }
+
+        .recipe_add {
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: #e4dcce;
+            color: #1c1c1c;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity .15s ease;
+
+            &:hover:not(:disabled) {
+                opacity: .8;
+            }
+
+            &:disabled {
+                opacity: .45;
+                cursor: not-allowed;
+            }
+        }
+
+        .recipe_empty {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.45);
+        }
+
+        .recipe_row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            input[type="number"] {
+                width: 104px;
+                flex-shrink: 0;
+                padding: 10px 12px;
+            }
+
+            select {
+                padding: 10px 12px;
+            }
+
+            .recipe_unit {
+                width: 34px;
+                flex-shrink: 0;
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.5);
+            }
+
+            .recipe_remove {
+                flex-shrink: 0;
+                width: 30px;
+                height: 30px;
+
+                border: none;
+                border-radius: 8px;
+                background-color: #f6d9d3;
+                color: #b3261e;
+                font-size: 17px;
+                line-height: 1;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: .8;
+                }
+            }
+        }
+
+        .recipe_cost {
+            display: flex;
+            justify-content: space-between;
+
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 10px;
+
+            font-size: 14px;
+            font-weight: 700;
+            color: #1c1c1c;
+
+            span:last-child {
+                color: #b5651d;
+            }
+        }
+    }
+
+    .form_error_banner {
+        background-color: #fbe0dc;
+        color: #b3261e;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .submit_btn {
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        background-color: #1c1614;
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        &:disabled {
+            background-color: #b9b2a8;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .85;
+        }
+    }
+}
+
+@media (max-width: 420px) {
+    .product_form_overlay {
+        padding: 20px 12px;
+    }
+
+    .product_form {
+        padding: 18px;
+
+        .field_row {
+            flex-wrap: wrap;
+
+            .field {
+                min-width: 140px;
+            }
+        }
+
+        .recipe_block .recipe_row {
+            input[type="number"] {
+                width: 70px;
+            }
+
+            select {
+                min-width: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,149 @@
+.production_journal {
+    background-color: #efe8de;
+    border-radius: 18px;
+    padding: 22px 26px;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #1c1c1c;
+        margin-bottom: 16px;
+    }
+
+    table {
+        width: 100%;
+        min-width: 640px;
+        border-collapse: collapse;
+
+        thead {
+            th {
+                text-align: left;
+                padding: 0 12px 10px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: .04em;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: #f8f4ee;
+
+                &:not(:last-child) {
+                    td {
+                        border-bottom: 8px solid #efe8de;
+                    }
+                }
+
+                td {
+                    padding: 16px 12px;
+                    font-size: 15px;
+                    color: #1c1c1c;
+
+                    &:first-child {
+                        border-top-left-radius: 12px;
+                        border-bottom-left-radius: 12px;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 12px;
+                        border-bottom-right-radius: 12px;
+                    }
+
+                    &.empty {
+                        text-align: center;
+                        color: rgba(0, 0, 0, 0.45);
+                    }
+                }
+            }
+        }
+
+        .product_name {
+            display: block;
+            font-weight: 600;
+        }
+
+        .product_date {
+            display: block;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.45);
+            margin-top: 2px;
+        }
+
+        .expiry {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+
+            &.good {
+                background-color: #dcf3e1;
+                color: #1f8a4c;
+            }
+
+            &.warning {
+                background-color: #fbe8c6;
+                color: #b5651d;
+            }
+
+            &.sold {
+                background-color: #e4dcce;
+                color: rgba(0, 0, 0, 0.55);
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action_btn {
+            border: none;
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity .15s ease;
+
+            &:hover {
+                opacity: .8;
+            }
+
+            &.edit {
+                background-color: #e4dcce;
+                color: #1c1c1c;
+            }
+
+            &.delete {
+                background-color: #f6d9d3;
+                color: #b3261e;
+            }
+
+            &:disabled {
+                opacity: .5;
+                cursor: not-allowed;
+            }
+
+            &:disabled:hover {
+                opacity: .5;
+            }
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .production_journal {
+        padding: 16px 14px;
+    }
+}

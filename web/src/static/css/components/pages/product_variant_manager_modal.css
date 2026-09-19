@@ -1,0 +1,194 @@
+.variant_manager_overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 22, 20, 0.45);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.variant_manager_card {
+    width: 100%;
+    max-width: 520px;
+
+    background-color: #fbf8f3;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.variant_manager_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 19px;
+        font-weight: 700;
+        color: #1c1c1c;
+    }
+
+    .variant_manager_close {
+        flex-shrink: 0;
+        border: none;
+        background: none;
+        font-size: 22px;
+        line-height: 1;
+        color: rgba(0, 0, 0, 0.45);
+        cursor: pointer;
+        padding: 0;
+    }
+}
+
+.variant_manager_add_btn {
+    align-self: flex-start;
+
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #1c1614;
+    color: white;
+    cursor: pointer;
+    transition: opacity .15s ease;
+
+    &:hover {
+        opacity: .85;
+    }
+}
+
+.form_error_banner {
+    background-color: #fbe0dc;
+    color: #b3261e;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13px;
+}
+
+.variant_manager_loading,
+.variant_manager_empty {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+    padding: 20px 10px;
+}
+
+.variant_manager_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.variant_manager_row {
+    background-color: #f3ede2;
+    border-radius: 10px;
+    padding: 12px 14px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    .variant_row_main {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+
+        .variant_row_name {
+            font-weight: 700;
+            color: #1c1c1c;
+        }
+
+        .variant_row_price {
+            color: #b5651d;
+            font-weight: 600;
+        }
+
+        .variant_row_stock {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.55);
+        }
+
+        .variant_row_recipe {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+
+            &.good {
+                background-color: #dcf3e1;
+                color: #1f8a4c;
+            }
+
+            &.warning {
+                background-color: #fbe8c6;
+                color: #b5651d;
+            }
+        }
+    }
+
+    .variant_manager_actions {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .variant_row_btn {
+        border: none;
+        border-radius: 8px;
+        padding: 7px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: opacity .15s ease;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &.edit {
+            background-color: #e4dcce;
+            color: #1c1c1c;
+        }
+
+        &.delete {
+            background-color: #f6d9d3;
+            color: #b3261e;
+            width: 26px;
+            padding: 7px 0;
+            font-size: 15px;
+            line-height: 1;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .variant_manager_overlay {
+        padding: 20px 12px;
+    }
+
+    .variant_manager_card {
+        padding: 18px;
+    }
+}

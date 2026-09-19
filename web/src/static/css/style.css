@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: var(--Roboto);
+}
+
+:root {
+  --Roboto: "Roboto", sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+}
+
+body {
+  overflow: hidden;
+  background-color: rgb(233, 209, 170);
+}
+
+a {
+  text-decoration: none;
+
+  color: white;
+}
+
+/* Сайдбар (Navigation) занимает ровно 100vh и не должен ехать вместе со
+   страницей — скроллится только сама область контента справа. */
+.main {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Ниже 900px сайдбар превращается в верхнюю панель (см. navigation.css),
+   поэтому #root складывается в колонку, а скролл всей страницы отдаётся
+   body/html — .main больше не может опираться на фиксированную высоту 100vh. */
+@media (max-width: 900px) {
+  html, body, #root {
+    height: auto;
+    min-height: 100%;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-y: auto;
+  }
+
+  #root {
+    flex-direction: column;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .main {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+/* Инпуты меньше 16px на iOS Safari вызывают автозум страницы при фокусе —
+   держим 16px на телефонах во всех формах приложения. */
+@media (max-width: 480px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}

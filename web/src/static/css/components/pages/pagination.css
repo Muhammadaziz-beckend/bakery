@@ -1,0 +1,39 @@
+.header_pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .page_indicator {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1c1c1c;
+        white-space: nowrap;
+    }
+
+    .page_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 32px;
+        height: 32px;
+
+        border: none;
+        border-radius: 10px;
+        background-color: #e4dcce;
+        color: #1c1c1c;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        transition: opacity .15s ease;
+
+        &:hover:not(:disabled) {
+            opacity: .8;
+        }
+
+        &:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+    }
+}
